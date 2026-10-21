@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ambulance Finder Bangladesh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF7F7;--surface:#fff;--ink:#2A0F13;--mute:#7A5A5E;--line:#F3D4D6;--red:#D62839;--red-ink:#fff;--teal:#D62839;--teal-soft:#FDE8EA;--ok:#C21B2C;--warn:#7A5A5E;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "Hind Siliguri",system-ui,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+h1,h2{font-family:"Bricolage Grotesque","Hind Siliguri",system-ui,sans-serif;letter-spacing:-.02em;line-height:1.1;margin:0}
+.sos{background:var(--red);color:var(--red-ink);position:sticky;top:0;z-index:5}
+.sos .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.sos b{font-weight:600}
+.sos a{background:var(--red-ink);color:var(--red);font-weight:700;text-decoration:none;padding:8px 18px;border-radius:999px}
+.hero{padding:44px 0 26px}
+.hero h1{font-size:clamp(2.2rem,6vw,3.9rem);max-width:15ch}
+.hero p{color:var(--mute);max-width:52ch;margin:14px 0 0;font-size:1.08rem}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:22px}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(min-width:760px){.filters{grid-template-columns:1.2fr 1fr 1.4fr}}
+label{display:block;font-weight:600;font-size:.92rem;margin-bottom:4px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:7px 14px;border-radius:999px;font:inherit;font-size:.92rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--bg);font-weight:600}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:26px 0 12px;flex-wrap:wrap}
+.bar h2{font-size:1.5rem}
+.count{color:var(--mute)}
+.list{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:760px){.list{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--teal);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.card.off{border-left-color:var(--line);opacity:.78}
+.card h3{margin:0;font-size:1.15rem;line-height:1.25}
+.row{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.loc{color:var(--mute);font-size:.94rem}
+.status{font-size:.85rem;font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--ok);animation:pulse 1.8s ease-out infinite}
+.off .dot{background:var(--mute);animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 55%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{background:var(--teal-soft);color:var(--ink);font-size:.82rem;padding:2px 10px;border-radius:6px}
+.tag.un{background:transparent;border:1px dashed var(--warn);color:var(--warn)}
+.tag.ver{background:transparent;border:1px solid var(--ok);color:var(--ok)}
+.meta{font-size:.92rem;color:var(--mute)}
+.acts{display:flex;gap:8px;margin-top:auto}
+.btn{flex:1;text-align:center;text-decoration:none;font:600 .95rem "Hind Siliguri",sans-serif;padding:10px 12px;border-radius:10px;border:0;cursor:pointer}
+.call{background:var(--red);color:var(--red-ink)}
+.wa{background:var(--teal-soft);color:var(--ink);border:1px solid var(--teal)}
+.main{background:var(--ink);color:var(--bg)}
+.empty{grid-column:1/-1;text-align:center;padding:34px 16px;color:var(--mute);border:1px dashed var(--line);border-radius:12px}
+.two{display:grid;gap:22px;margin-top:34px}
+@media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
+.two h2{font-size:1.4rem;margin-bottom:6px}
+.two p{margin:0 0 12px;color:var(--mute)}
+.fg{display:grid;gap:10px}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.note{font-size:.88rem;color:var(--mute);margin-top:10px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}
+.toast.show{opacity:1}
+.hero h1{color:var(--red)}
+.optrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.opt{font:600 1rem "Hind Siliguri",sans-serif;padding:12px 22px;border-radius:999px;border:2px solid var(--red);cursor:pointer;background:var(--surface);color:var(--red)}
+.opt.hot{background:var(--red);color:var(--red-ink)}
+.modal{position:fixed;inset:0;z-index:20;background:rgba(42,15,19,.55);display:flex;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));overflow:auto}
+.modal[hidden]{display:none}
+.mpanel{position:relative;width:100%;max-width:520px;margin:auto}
+.x{position:absolute;top:8px;right:12px;border:0;background:none;font-size:1.9rem;line-height:1;color:var(--mute);cursor:pointer}
+.toast{z-index:40}
+body.lock{overflow:hidden}
+.splash{position:fixed;inset:0;z-index:30;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;transition:transform .7s cubic-bezier(.7,0,.3,1)}
+.splash.out{transform:translateY(-100%)}
+.road{position:relative;width:100%;height:130px;overflow:hidden}
+.road::before{content:"";position:absolute;left:0;right:0;bottom:24px;height:6px;background:var(--red)}
+.road::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:4px;background:repeating-linear-gradient(90deg,var(--red) 0 36px,transparent 36px 72px);animation:dash .45s linear infinite}
+@keyframes dash{to{background-position-x:-72px}}
+.amb{position:absolute;left:0;bottom:28px;width:240px;height:100px;animation:drive 2.8s cubic-bezier(.45,0,.85,.55) both}
+@keyframes drive{from{transform:translateX(-260px)}to{transform:translateX(100vw)}}
+.wheel{transform-box:fill-box;transform-origin:center;animation:spin .35s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.l1{animation:b1 .5s steps(1) infinite}.l2{animation:b2 .5s steps(1) infinite}
+@keyframes b1{50%{fill:#fff}}@keyframes b2{50%{fill:#D62839}}
+.intro{text-align:center;margin-top:18px}
+.intro>*{opacity:0;animation:rise .6s ease forwards}
+.intro h1{font-size:clamp(2.8rem,11vw,5.6rem);color:var(--red);animation-delay:2.3s}
+.intro p{color:var(--mute);margin:12px 0 22px;font-size:1.1rem;animation-delay:2.5s}
+.intro .btn{display:inline-block;flex:none;padding:14px 34px;font-size:1.05rem;animation-delay:2.7s}
+.intro .skip{display:block;margin-top:16px;color:var(--red);font-weight:600;animation-delay:2.9s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.amb{display:none}.road::after{animation:none}.intro>*{animation:none;opacity:1}}
+footer{padding:36px 0 46px;color:var(--mute);font-size:.9rem}
+</style>
+</head>
+<body class="lock">
+<div class="splash" id="splash">
+<div class="road" aria-hidden="true"><svg class="amb" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 78V28q0-8 8-8h132v58z" fill="#fff" stroke="#D62839" stroke-width="3"/>
+<path d="M152 78V38H190Q198 38 204 46L222 62Q226 66 226 72V78Z" fill="#fff" stroke="#D62839" stroke-width="3"/>
+<path d="M162 46h26q4 0 7 4l11 12h-44z" fill="#FDE8EA" stroke="#D62839" stroke-width="2"/>
+<rect x="12" y="64" width="140" height="7" fill="#D62839"/>
+<rect x="68" y="26" width="14" height="32" rx="2" fill="#D62839"/><rect x="59" y="35" width="32" height="14" rx="2" fill="#D62839"/>
+<rect class="l1" x="98" y="11" width="20" height="9" rx="2" fill="#D62839" stroke="#D62839" stroke-width="1.5"/><rect class="l2" x="122" y="11" width="20" height="9" rx="2" fill="#fff" stroke="#D62839" stroke-width="1.5"/>
+<g transform="translate(55 82)"><g class="wheel"><circle r="16" fill="#2A0F13"/><circle r="7" fill="#fff"/><rect x="-1.5" y="-14" width="3" height="7" fill="#D62839"/></g></g>
+<g transform="translate(185 82)"><g class="wheel"><circle r="16" fill="#2A0F13"/><circle r="7" fill="#fff"/><rect x="-1.5" y="-14" width="3" height="7" fill="#D62839"/></g></g>
+</svg></div>
+<div class="intro"><h1>Find Ambulance</h1><p>Call or message a nearby driver in seconds.</p><button class="btn call" id="enter" type="button">Start searching</button><a class="skip" href="tel:999">Emergency? Call 999</a></div>
+</div>
+<div class="sos"><div class="wrap"><span><b>Life-threatening emergency?</b> Call the national helpline first.</span><a href="tel:999">Call 999</a></div></div>
+
+<header class="hero"><div class="wrap">
+<h1>Find an ambulance near you, fast.</h1>
+<p>Search by area or name, then call the service directly. Where a mobile number is listed, you can also send your request on WhatsApp.</p>
+
+<div class="optrow"><button class="opt hot" type="button" data-open="m-req">Send urgent request</button><button class="opt" type="button" data-open="m-add">List your ambulance</button></div>
+<div class="panel">
+<div class="filters">
+<div><label for="dist">District</label><select id="dist"></select></div>
+<div><label for="area">Area or hospital</label><input id="area" type="search" placeholder="e.g. Mirpur, Dhanmondi"></div>
+<div><label for="q">Name or number</label><input id="q" type="search" placeholder="Search provider"></div>
+</div>
+</div>
+</div></header>
+
+<main class="wrap">
+<div class="bar"><h2>Ambulances</h2><span class="count" id="count" aria-live="polite"></span></div>
+<div class="list" id="list"></div>
+
+<section>
+<div class="modal" id="m-req" hidden><div class="panel mpanel" role="dialog" aria-modal="true" aria-labelledby="t-req"><button class="x" type="button" data-close aria-label="Close">×</button>
+<h2 id="t-req">Send an urgent request</h2>
+<p>Fill this in once, then send it to any driver on WhatsApp.</p>
+<div class="fg">
+<div><label for="rp">Patient name</label><input id="rp"></div>
+<div class="fg2"><div><label for="rt">Type needed</label><select id="rt"></select></div><div><label for="rc">Contact number</label><input id="rc" inputmode="tel"></div></div>
+<div><label for="rf">Pickup location</label><input id="rf" placeholder="Address, landmark"></div>
+<div><label for="rh">Destination hospital</label><input id="rh"></div>
+<button class="btn call" id="copyReq" type="button">Copy request message</button>
+</div>
+<p class="note">After copying, tap WhatsApp on a driver card and paste. The message is also added automatically when this form is filled.</p>
+</div></div>
+
+<div class="modal" id="m-add" hidden><div class="panel mpanel" role="dialog" aria-modal="true" aria-labelledby="t-add"><button class="x" type="button" data-close aria-label="Close">×</button>
+<h2 id="t-add">List your ambulance</h2>
+<p>Own or drive an ambulance? Add it here. For now, listings are saved on this device only.</p>
+<form class="fg" id="addForm" onsubmit="return false">
+<div><label for="an">Service name</label><input id="an" required></div>
+<div class="fg2"><div><label for="ad">District</label><select id="ad"></select></div><div><label for="aa">Area</label><input id="aa" required></div></div>
+<div class="fg2"><div><label for="at">Type</label><select id="at"></select></div><div><label for="ap">Phone</label><input id="ap" inputmode="tel" required></div></div>
+<div class="fg2"><div><label for="ar">Base fare (৳)</label><input id="ar" type="number" min="0"></div><div><label for="ah">Hours</label><select id="ah"><option value="1">Open 24/7</option><option value="0">Day only</option></select></div></div>
+<button class="btn main" id="addBtn" type="button">Add listing</button>
+</form>
+</div></div>
+</section>
+</main>
+
+<footer><div class="wrap">Numbers were collected from public lists and directories. Availability and fare are not listed, so please confirm by phone. Landlines are shown with the Dhaka code 02. Bangladesh national emergency: 999.</div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const DISTRICTS=["Dhaka","Chattogram","Sylhet","Rajshahi","Khulna","Barishal","Barguna","Bogura","Rangpur","Dinajpur","Mymensingh","Pabna","Noakhali","Cumilla"];
+const TYPES=["ICU","AC","Non-AC","Freezing","Air ambulance"];
+let data=[
+{n:"Ad-Din Hospital Ambulance",d:"Dhaka",a:"Bara Maghbazar",t:[],p:["10610","01713488411","01713488412","01713488415","01713488418","029362929"],s:"PDF + Pulse + BD Trade Info"},
+{n:"Ahsania Mission Cancer & General Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["0255092196","01531291810"],s:"PDF"},
+{n:"Al Amin Ambulance Service",d:"Dhaka",a:"Panthapath",t:[],p:["029134171","01789595813"],s:"Pulse"},
+{n:"Alif Ambulance Service",d:"Dhaka",a:"West Panthapath",t:[],p:["01713205555","01819253777","01552637705","029131688","028117576"],s:"PDF + Pulse + BD Trade Info"},
+{n:"Al-Markazul Islam Ambulance Service",d:"Dhaka",a:"Babar Road",t:[],p:["01754448777","01995559999","029127867","029129217","028114980"],s:"PDF + Pulse + All Eyes On BD"},
+{n:"Anjuman-E-Mufidul Islam Ambulance",d:"Dhaka",a:"Kakrail",t:[],p:["029336611","027411660","027410786"],s:"PDF + Pulse"},
+{n:"BIRDEM Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["029661551","028616641"],s:"PDF"},
+{n:"BNSB Dhaka Eye Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["028014476"],s:"PDF"},
+{n:"BSMMU",d:"Dhaka",a:"Dhaka",t:[],p:["0255165760"],s:"PDF"},
+{n:"Central Hospital Ambulance",d:"Dhaka",a:"Green Road, Dhanmondi",t:[],p:["01733972986","029660015","058611050".replace(/^0/,"02")],s:"Pulse"},
+{n:"CMH Dhaka",d:"Dhaka",a:"Dhaka",t:[],p:["029871469"],s:"PDF"},
+{n:"Desh Ambulance Service",d:"Dhaka",a:"East Ahmednagar",t:[],p:["01790509607"],s:"Pulse"},
+{n:"Dhaka Medical College Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["028626812"],s:"PDF"},
+{n:"Dhaka Shishu Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["028116061","028116062","028114571","028114572"],s:"PDF"},
+{n:"Evercare Hospital Dhaka",d:"Dhaka",a:"Dhaka",t:[],p:["10678"],s:"PDF"},
+{n:"Holy Family Red Crescent Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["028311721","029113512"],s:"PDF"},
+{n:"Ibrahim Cardiac Ambulance",d:"Dhaka",a:"Kazi Nazrul Islam Avenue",t:[],p:["01713003004","029671141"],s:"Pulse"},
+{n:"ICDDRB Mohakhali",d:"Dhaka",a:"Mohakhali",t:[],p:["028811751","028860523"],s:"PDF"},
+{n:"Islami Bank Central Hospital Ambulance",d:"Dhaka",a:"Kakrail",t:[],p:["029360331","029355801"],s:"Pulse"},
+{n:"Islami Bank Hospital Mirpur Ambulance",d:"Dhaka",a:"Mirpur",t:[],p:["01786073455","029028101","029027963"],s:"Pulse"},
+{n:"Islami Bank Hospital Motijheel Ambulance",d:"Dhaka",a:"Motijheel",t:[],p:["01923820100","029360963","029336421"],s:"Pulse"},
+{n:"Lab-aid Cardiac Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["01715120229","01715154590"],s:"PDF"},
+{n:"Labaid Cardiac Ambulance Uttara",d:"Dhaka",a:"Uttara",t:[],p:["01766660444","0258950316"],s:"Pulse"},
+{n:"Medinova Medical Services",d:"Dhaka",a:"Dhaka",t:[],p:["01750557722","028113721","029120288"],s:"PDF"},
+{n:"Monowara Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["01715653887","028318135"],s:"PDF"},
+{n:"National Heart Institute",d:"Dhaka",a:"Dhaka",t:[],p:["029122560","028114089"],s:"PDF"},
+{n:"Prime General Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["029562267","029559862"],s:"PDF"},
+{n:"Red Crescent Ambulance",d:"Dhaka",a:"Dhaka",t:[],p:["029330188","029330189","029385799"],s:"PDF"},
+{n:"Salimullah Medical College & Mitford Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["027319002"],s:"PDF"},
+{n:"Shahid Suhrawardi Hospital",d:"Dhaka",a:"Dhaka",t:[],p:["029130800"],s:"PDF"},
+{n:"Mim Ambulance Service",d:"Dhaka",a:"Boro Moghbazar",t:["AC","Non-AC","ICU","CCU","NICU","Freezing"],p:["01716523567","01712093856","01712654532"],s:"BD Trade Info"},
+{n:"Habiba Ambulance Services",d:"Dhaka",a:"Mugda Medical College",t:["ICU","NICU","ALS","Freezing","AC","Non-AC"],p:["01716559887","01712690143"],s:"BD Trade Info"},
+{n:"Shafin Ambulance Service",d:"Dhaka",a:"Moghbazar",t:["ICU","NICU","CCU","Freezing","AC","Non-AC"],p:["01712140345","01608834662"],s:"BD Trade Info"},
+{n:"Fatama Ambulance Services",d:"Dhaka",a:"Dhaka",t:[],p:["01915848727","01714492717","01987017067","01965284951"],s:"BD Trade Info"},
+{n:"Allahr Dan Ambulance Services",d:"Dhaka",a:"Nawab Habibullah Road",t:[],p:["01749654751"],s:"BD Trade Info"},
+{n:"Shohag Ambulance Services",d:"Dhaka",a:"PG Hospital, Gate 1",t:[],p:["01710019863"],s:"BD Trade Info"},
+{n:"Barguna Free Ambulance Service",d:"Barguna",a:"Barguna",t:[],p:["01720706634"],s:"All Eyes On BD"},
+{n:"Enam Medical",d:"Dhaka",a:"Dhaka",t:[],p:["01990471517"],s:"All Eyes On BD"},
+{n:"Savar Ambulance Service",d:"Dhaka",a:"Savar",t:[],p:["01795695697"],s:"All Eyes On BD"},
+{n:"Savar Emergency Ambulance Service",d:"Dhaka",a:"Savar",t:[],p:["01312250990"],s:"All Eyes On BD"},
+{n:"Tuhin Ambulance Service",d:"Dhaka",a:"Dhaka",t:[],p:["01786417341"],s:"All Eyes On BD"},
+{n:"Deep Ambulance Service",d:"Dhaka",a:"Dhaka",t:[],p:["01775070002"],s:"All Eyes On BD"},
+{n:"Dipu Ambulance Service",d:"Dhaka",a:"Dhaka",t:[],p:["01717343956"],s:"All Eyes On BD"},
+{n:"Raha Ambulance Service",d:"Dhaka",a:"Dhaka",t:[],p:["01715636615"],s:"All Eyes On BD"},
+{n:"Al Amin Ambulance Service (Rampura)",d:"Dhaka",a:"Rampura, Meradia",t:[],p:["01720448666"],s:"All Eyes On BD"},
+{n:"Badda Ambulance and Freezing Ambulance",d:"Dhaka",a:"Badda, Banasree",t:["Freezing"],p:["01765332882"],s:"All Eyes On BD"},
+{n:"Ambulance Service, Bangladesh Police Plaza",d:"Dhaka",a:"Bangladesh Police Plaza",t:[],p:["01405600700"],s:"All Eyes On BD"},
+{n:"AMZ Hospital",d:"Dhaka",a:"Badda",t:[],p:["01847331010"],s:"All Eyes On BD"},
+{n:"Mymensingh Ambulance Service",d:"Mymensingh",a:"Mymensingh",t:[],p:["01758845430","01953921890"],s:"User"},
+{n:"Rangpur Update Ambulance Service",d:"Rangpur",a:"Rangpur",t:[],p:["01971555555"],s:"User"},
+{n:"Riyad Ambulance Service",d:"Dinajpur",a:"Dinajpur",t:[],p:["01758845430"],s:"User"},
+{n:"Noor Ambulance Service",d:"Pabna",a:"Shalgaria, Golapbag",t:[],p:["01712365017"],s:"Doctor Bangladesh"},
+{n:"Anjuman Mufidul Islam Ambulance",d:"Pabna",a:"Anjuman Mufidul Islam Complex",t:[],p:["01727461910"],s:"Doctor Bangladesh"},
+{n:"Dr. Antora Ambulance Service",d:"Pabna",a:"Pabna Medical College",t:[],p:["01727434775"],s:"Doctor Bangladesh"},
+{n:"24 Ambulance",d:"Noakhali",a:"Noakhali (from Dhaka)",t:["AC","Non-AC","Freezing","ICU"],p:["01911125156","01710060020"],s:"24ambulance.com"},
+{n:"24 Ambulance",d:"Dhaka",a:"Moghbazar, Mohakhali, Uttara, Mirpur-10",t:["AC","Non-AC","Freezing","ICU"],p:["01911125156","01710060020"],s:"24ambulance.com"}
+].concat(["Dhaka","Chattogram","Sylhet","Rajshahi","Khulna","Barishal","Bogura"].map(c=>({n:"National Ambulance Service",d:c,a:c,t:["Non-AC","AC","ICU","Air ambulance","Freezing"],p:["01605777755"],s:"nationalambulancebd.com"})));
+try{const s=JSON.parse(localStorage.getItem("amb_user")||"[]");if(Array.isArray(s))data=data.concat(s)}catch(e){}
+const $=id=>document.getElementById(id);
+const f={type:new Set(),avail:false,h24:false};
+function opts(sel,arr,first){sel.innerHTML="";if(first){const o=document.createElement("option");o.value="";o.textContent=first;sel.appendChild(o)}arr.forEach(x=>{const o=document.createElement("option");o.value=x;o.textContent=x;sel.appendChild(o)})}
+opts($("dist"),DISTRICTS,"All districts");opts($("rt"),TYPES);opts($("ad"),DISTRICTS);opts($("at"),TYPES);
+["dist","area","q"].forEach(i=>$(i).addEventListener("input",render));
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("show"),2200)}
+function reqMsg(){const g=i=>$(i).value.trim();return "Urgent ambulance needed ("+$("rt").value+").\nPatient: "+(g("rp")||"-")+"\nPickup: "+(g("rf")||"-")+"\nHospital: "+(g("rh")||"-")+"\nContact: "+(g("rc")||"-")}
+function intl(p){p=p.replace(/\D/g,"");return p.startsWith("0")?"88"+p:p}
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
+function render(){
+const d=$("dist").value,a=$("area").value.toLowerCase().trim(),q=$("q").value.toLowerCase().trim();
+const res=data.filter(x=>(!d||x.d===d)&&(!a||x.a.toLowerCase().includes(a))&&(!q||x.n.toLowerCase().includes(q)||[].concat(x.p).join(" ").includes(q))&&(!f.avail||x.on)&&(!f.h24||x.h)&&[...f.type].every(t=>x.t.includes(t))).sort((x,y)=>x.n.localeCompare(y.n));
+$("count").textContent=res.length+(res.length===1?" result":" results");
+const L=$("list");L.innerHTML="";
+if(!res.length){L.appendChild(el("div","empty","No ambulance matches these filters. Try another district, remove a type, or call 999."));return}
+res.forEach(x=>{
+const c=el("article","card");
+const r=el("div","row");const w=el("div");w.appendChild(el("h3","",x.n));w.appendChild(el("div","loc",x.a===x.d?x.d:x.a+", "+x.d));r.appendChild(w);
+c.appendChild(r);
+const tg=el("div","tags");(x.t||[]).forEach(t=>tg.appendChild(el("span","tag",t)));if(tg.childNodes.length)c.appendChild(tg);
+const P=[].concat(x.p);const m=el("div","meta");if(P.length>1){m.appendChild(document.createTextNode("Other numbers: "));P.slice(1).forEach((n,i)=>{const a2=el("a","",n);a2.href="tel:"+n;a2.style.color="inherit";m.appendChild(a2);if(i<P.length-2)m.appendChild(document.createTextNode(", "))})}if(x.r)m.appendChild(document.createTextNode(" Base fare ৳"+x.r));if(m.childNodes.length)c.appendChild(m);
+const ac=el("div","acts");
+const call=el("a","btn call","Call "+P[0]);call.href="tel:"+P[0];
+ac.appendChild(call);const mob=P.find(n=>/^01\d{9}$/.test(n));
+if(mob){const wa=el("a","btn wa","WhatsApp");wa.href="https://wa.me/"+intl(mob)+"?text="+encodeURIComponent(reqMsg());wa.target="_blank";wa.rel="noopener";ac.appendChild(wa)}
+c.appendChild(ac);L.appendChild(c)})}
+$("copyReq").onclick=()=>{const m=reqMsg();(navigator.clipboard?navigator.clipboard.writeText(m):Promise.reject()).then(()=>{toast("Request copied");$("m-req").hidden=true;document.body.classList.remove("lock")}).catch(()=>toast("Copy failed. Select the text manually."));render()};
+["rp","rt","rc","rf","rh"].forEach(i=>$(i).addEventListener("input",render));
+$("addBtn").onclick=()=>{
+const n=$("an").value.trim(),a=$("aa").value.trim(),p=$("ap").value.trim();
+if(!n||!a||!/^(\+?88)?01\d{9}$/.test(p.replace(/[\s-]/g,""))){toast("Enter a name, area and valid 01XXXXXXXXX number");return}
+const item={n,d:$("ad").value,a,t:[$("at").value],p:p.replace(/[\s-]/g,""),r:+$("ar").value||0,h:+$("ah").value,v:0,on:1};
+data.push(item);
+try{const s=JSON.parse(localStorage.getItem("amb_user")||"[]");s.push(item);localStorage.setItem("amb_user",JSON.stringify(s))}catch(e){}
+["an","aa","ap","ar"].forEach(i=>$(i).value="");render();toast("Listing added");$("m-add").hidden=true;document.body.classList.remove("lock")};
+render();
+(function(){let last=null;function close(m){m.hidden=true;document.body.classList.remove("lock");if(last)last.focus()}
+document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>{last=b;const m=$(b.dataset.open);m.hidden=false;document.body.classList.add("lock");const i=m.querySelector("input,select");if(i)i.focus()});
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m||e.target.hasAttribute("data-close"))close(m)}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal:not([hidden])").forEach(close)})})();
+(function(){const s=$("splash");function go(){s.classList.add("out");document.body.classList.remove("lock");setTimeout(()=>s.remove(),800)}$("enter").onclick=go;document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.body.contains(s))go()})})();
+</script>
+</body>
+</html>
