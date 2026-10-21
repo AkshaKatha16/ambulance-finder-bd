@@ -5,7 +5,9 @@ A fast, mobile-friendly web app to find an ambulance in Bangladesh. Search by di
 
 **[Live demo](https://YOUR-USERNAME.github.io/ambulance-finder-bd/)** · Single HTML file · No build step · No dependencies
 
-![Intro screen of Ambulance Finder Bangladesh](docs/screenshots/01-intro.png)
+![Intro screen of Ambulance Finder Bangladesh]
+<img width="648" height="572" alt="01-intro" src="https://github.com/user-attachments/assets/d5f0266d-eecf-4d76-981c-4aa240e556a9" />
+
 
 ## Why
 
@@ -16,8 +18,6 @@ In an emergency, people lose time searching Facebook groups and scattered direct
 <img width="648" height="572" alt="01-intro" src="https://github.com/user-attachments/assets/1a545b83-b6d8-43b1-9dfc-3dfdbfb9f021" />
 
 ### Home
-
-<img width="648" height="572" alt="01-intro" src="https://github.com/user-attachments/assets/b0bb1c7e-bfe5-4afd-89de-25e143e0ec83" />
 <img width="1334" height="429" alt="02-home" src="https://github.com/user-attachments/assets/9c05d5a9-6707-469c-9a66-b9423559fb8d" />
 
 ### Search results
