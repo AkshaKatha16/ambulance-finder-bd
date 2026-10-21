@@ -13,19 +13,23 @@ In an emergency, people lose time searching Facebook groups and scattered direct
 
 ## Screenshots
 
+<img width="648" height="572" alt="01-intro" src="https://github.com/user-attachments/assets/1a545b83-b6d8-43b1-9dfc-3dfdbfb9f021" />
+
 ### Home
 
-![Home screen with search filters and action buttons](docs/screenshots/02-home.png)
+<img width="648" height="572" alt="01-intro" src="https://github.com/user-attachments/assets/b0bb1c7e-bfe5-4afd-89de-25e143e0ec83" />
+<img width="1334" height="429" alt="02-home" src="https://github.com/user-attachments/assets/9c05d5a9-6707-469c-9a66-b9423559fb8d" />
 
 ### Search results
-
-![List of ambulance services with Call and WhatsApp buttons](docs/screenshots/03-listings.png)
+<img width="1334" height="351" alt="03-listings" src="https://github.com/user-attachments/assets/d666940e-7fa1-412d-a169-2c9b38bbe80d" />
 
 ### Pop-up forms
 
 | Send an urgent request | List your ambulance |
 |:---:|:---:|
-| ![Urgent request form](docs/screenshots/05-send-urgent-request.png) | ![Form to list an ambulance](docs/screenshots/04-list-your-ambulance.png) |
+<img width="565" height="583" alt="05-send-urgent-request" src="https://github.com/user-attachments/assets/e98a9e4f-e555-4311-b733-4fcc974b4138" />
+<img width="565" height="577" alt="04-list-your-ambulance" src="https://github.com/user-attachments/assets/dd93aea1-fb6a-4802-9b3e-d478de265b38" />
+
 
 ## Features
 
@@ -46,11 +50,6 @@ In an emergency, people lose time searching Facebook groups and scattered direct
 - Listings added through the form are stored only in the visitor's own browser. There is no shared database yet.
 - This is not an official emergency service. In a life-threatening emergency call **999**.
 - If you run a listed service and want your entry changed or removed, please open an issue.
-
-
-## Contributing
-
-Corrections are the most useful contribution. If a number is wrong, bounces, or has changed, open an issue or a pull request that edits the `data` array. Please include how you checked the number.
 
 ## License
 
