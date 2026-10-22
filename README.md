@@ -3,7 +3,8 @@
 
 A fast, mobile-friendly web app to find an ambulance in Bangladesh. Search by district, area or name, then call the service directly or send your request on WhatsApp.
 
-**[Live demo](https://YOUR-USERNAME.github.io/ambulance-finder-bd/)** 
+**[Live demo]
+https://akshakatha16.github.io/ambulance-finder-bd/
 
 ![Intro screen of Ambulance Finder Bangladesh]
 <img width="648" height="572" alt="01-intro" src="https://github.com/user-attachments/assets/d5f0266d-eecf-4d76-981c-4aa240e556a9" />
